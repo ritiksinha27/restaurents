@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% block page%}
+
+
+<form method="get">
+</div>
+<div class="mb-3">
+  <label for="text" class="form-label">name</label>
+  <input type="text" class="form-control" name="name" required='true'/>
+</div>
+<div class="mb-3">
+  <label for="digit" class="form-label">phone</label>
+  <input type="text" class="form-control" name="phone" required='true' />
+</div>
+{% if table%}
+<div class="mb-3">
+  <label for="digit" class="form-label">Service Id</label>
+  <button>{{table}}</button>
+</div>
+{%else%}
+<div class="mb-3">
+    <label for="digit" class="form-label">Service Id</label>
+    
+    <input type="text" class="form-control" name="service_id"/>
+  </div>
+{%endif%}
+
+                <button class="btn btn-primary" type="submit">Save </button>
+                <!-- <a class="btn btn-primary" href="upddirect/{{i.id}}" role="button" style="width: 2cm;">Save Changes</a> -->
+             </form>
+
+
+{% endblock page%}

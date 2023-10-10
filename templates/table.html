@@ -1,0 +1,16 @@
+{% extends 'base.html'%}{% block page%}
+
+<h1 style="text-align: center; size: 40px;">Select Your Table</h1>
+<form method="get">
+    
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        {% for i in tables%}
+        <input type="radio" name="tableno" class="btn-check" id={{i.table}} autocomplete="off" checked value={{i.table}}>
+        <label style="margin: 50px;" class="btn btn-outline-primary" for={{i.table}}>{{i.table}}</label>
+        {% endfor%}
+    </div>
+     
+      <button type="submit">Submit</button>
+
+</form>
+{%endblock page%}

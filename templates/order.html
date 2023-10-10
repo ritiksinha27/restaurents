@@ -1,0 +1,39 @@
+{% extends 'base.html'%}{% block page%}
+{% load filter%}
+
+<ul class="list-group">
+    <li class="list-group-item" style="text-align: center;">Order No.--{{order_no}}
+    </ul>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">item</th>
+            <th scope="col">qnty</th>
+            <th scope="col">price</th>
+            <th scope="col">Total</th>
+        
+          </tr>
+    </thead>
+    <tbody>
+        {% for i in bill %}
+        <tr>
+            <th scope="col">{{i.item}}</th>
+            <th scope="col">{{i.quantity}}</th>
+            <th scope="col">{{i.item.price}}</th>
+            
+                {% with item_price=i.item.price quantity=i.quantity %}
+    {% with total_price=item_price|floatmul:quantity %}
+        <th scope="col">{{ total_price }}</th>
+    {% endwith %}
+{% endwith %}
+            
+        
+          </tr>
+          {% endfor %}
+    </tbody>
+
+</table>
+<h2 style="padding: 20px;">Total price: {{total}}</h2> 
+<a href=/ class="btn btn-primary">Done</a>
+{% endblock page %}

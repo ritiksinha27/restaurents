@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static%}
+{% load filter %} 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{%endblock css%}
+{% block page %}
+
+Welcome,{{data_pass.name}},{{data_pass.id}}
+<br>
+Order-No.{{order_id.order_no}}
+<form method="get">
+<input style="display: none;" name="order_no" value={{order_id.order_no}}>
+<input style="display: none;" name="cust_id" value={{data_pass.id}}>
+<p style="text-align:center;font-size: 50px; background-color:aliceblue;margin: 10px;">Hello Foodie</p>
+ <p style="text-align:center;font-size: 50px; background-color:white;">Menu</p> 
+ {% for type in category%}
+ 
+ 
+<div class="container text-center">
+  <div class="row justify-content-start">
+    <div  class="content-table col-8">
+      
+<table class="table">
+  <p style="font-size: larger; background-color:antiquewhite">{{type.category}}</p> 
+  <thead>
+    <tr>
+      <th scope="col" style="width: 180px;">item</th>
+      <th scope="col">price</th>
+      <th scope="col">Selection</th>
+  
+    </tr>
+  </thead>
+  <tbody>
+    
+    
+   
+      
+      {% for i in type.menu_set.all %}  
+    <tr>
+      <th scope="col" >{{i.item}}</th>
+      <th scope="col">{{i.price}}</th>
+      
+      <th scope="col">
+        
+        
+        <button
+        class="btn btn-secondary"
+        style="padding: 10px 20px"
+        type="submit"
+        value='{{i.item}}'
+         name="item"
+        
+      >
+        Add
+      </button>
+        
+      </th>
+  {% endfor %} {% endfor %}
+
+    </tr>
+   
+
+  </tbody>
+  
+</table>
+
+</div>
+<div class="col-4">
+ 
+<table class="table">
+<thead>
+
+  <tr>
+    <th>Items</th>
+    <th>Quantity</th>
+    <th>Total</th>
+  </tr>
+</thead>
+<tbody>
+  {% for x in total%}
+  <tr>
+    <th>{{x.item}}</th>
+    <th>{{x.quantity}}</th>
+    {% with item_price=x.item.price quantity=x.quantity %}
+    {% with total_price=item_price|floatmul:quantity %}
+        <th>{{ total_price }}</th>
+    {% endwith %}
+{% endwith %}
+    
+  </tr>
+
+</tbody>
+{% endfor %}
+
+</table>
+<h2 style="padding: 20px;">Total price: {{total_prc}}</h2>
+</div>
+<a href="/order/{{data_pass.id}}" class="btn btn-primary btn-large">Proceed to Checkout</a>
+
+</form>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+  crossorigin="anonymous"
+></script>
+
+{% endblock page %}
