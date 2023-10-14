@@ -1,0 +1,27 @@
+{%extends 'base2.html'%}
+{% block page %}
+<div class="container text-center">
+    <div class="row justify-content-start">
+      <div  class="content-table col-12">
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Staff Name</th>
+            <th scope="col">Staff Id</th>
+            <th scope="col">Wroking Hours</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for i in data%}
+    <tr>
+        <th scope="col">{{i.log.staff_id}}</th>
+        <th scope="col">{{i.log.staff_id.staffid}}</th>
+        <th scope="col">{{i.work}}</th>
+        
+    </tr>
+    {%endfor%}
+</tbody>
+</table>
+
+</div></div></div>
+{%endblock page%}

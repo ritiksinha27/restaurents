@@ -1,0 +1,182 @@
+{%extends 'base2.html'%} {%block page%}
+<div>
+  <div style="display: flex; justify-content: center; align-items: center">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      Add New Item
+    </button>
+  </div>
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Enter Details</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form method="get">
+            {% csrf_token %}  {{ form3.as_p }}{{ form2.as_p }}
+            <button class="btn btn-primary" type="submit">Save</button>
+            <!-- <a class="btn btn-primary" href="upddirect/{{i.id}}" role="button" style="width: 2cm;">Save Changes</a> -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+
+          <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <div style="display: flex; justify-content: center; align-items: center">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal2"
+    >
+      Add New Category
+    </button>
+  </div>
+  <div
+    class="modal fade"
+    id="exampleModal2"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Enter Details</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form method="get">
+            {% csrf_token %} {{ form1.as_p }}
+            <button class="btn btn-primary" type="submit">Save</button>
+            <!-- <a class="btn btn-primary" href="upddirect/{{i.id}}" role="button" style="width: 2cm;">Save Changes</a> -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+
+          <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <div style="display: flex; justify-content: center; align-items: center">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal3"
+    >
+      Add existing Item
+    </button>
+  </div>
+  <div
+    class="modal fade"
+    id="exampleModal3"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Enter Details</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form method="get">
+            {% csrf_token %} {{ form4.as_p }}
+            <button class="btn btn-primary" type="submit">Save</button>
+            <!-- <a class="btn btn-primary" href="upddirect/{{i.id}}" role="button" style="width: 2cm;">Save Changes</a> -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+
+          <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container text-center">
+  <div class="row justify-content-start">
+    <div class="content-table col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Item Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Unit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in data%}
+          <tr>
+            <th scope="col">{{i.item_inv}}</th>
+            <th scope="col">{{i.item_inv.categ}}</th>
+            <th scope="col">{{i.quantity}}</th>
+            <th scope="col">{{i.unit}}</th>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock page%}

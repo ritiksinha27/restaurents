@@ -5,7 +5,7 @@ from django.contrib import admin
 from .models import *
 
 class POS_Adm(admin.ModelAdmin):
-    list_display=['order_in','Amount' ]
+    list_display=['order_in','Amount','Items' ]
 
 admin.site.register(POS,POS_Adm)
 class POS_view_Adm(admin.ModelAdmin):
@@ -19,7 +19,7 @@ class Inventory_Item_Adm(admin.ModelAdmin):
     list_display=['item_name', 'catego' ]
 admin.site.register(Inventory_Item,Inventory_Item_Adm)       
 class Inventory_Adm(admin.ModelAdmin):
-    list_display=[ 'quantity' ,'item']
+    list_display=[ 'item','quantity' ,'unit']
 admin.site.register(Inventory,Inventory_Adm)       
 class Staff_types_Adm(admin.ModelAdmin):
     list_display=[ 'staff_type']
@@ -31,5 +31,5 @@ class Login_Adm(admin.ModelAdmin):
     list_display=[ 'st_name' ,'st_id' ,'login', 'logout', 'date']
 admin.site.register(Login,Login_Adm)
 class Staff_info_Adm(admin.ModelAdmin):
-    list_display=['staff_id' ,'Wrkhours' ]
+    list_display=['staff_no' ,'work']
 admin.site.register(Staff_info,Staff_info_Adm)     

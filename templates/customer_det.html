@@ -1,0 +1,32 @@
+{% extends 'base2.html'%}
+{% block page%}
+Hello
+<div class="container text-center">
+    <div class="row justify-content-start">
+      <div  class="content-table col-12">
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Service Type</th>
+            <th scope="col">Service ID</th>
+
+        </tr>
+    </thead>
+    <tbody>
+    {% for i in data%}
+    <tr>
+        <th scope="col">{{i.date}}</th>
+        <th scope="col">{{i.name}}</th>
+        <th scope="col">{{i.phone}}</th>
+        <th scope="col">{{i.service_type}}</th>
+        <th scope="col">{{i.service_id}}</th>
+    </tr>
+    {%endfor%}
+</tbody>
+</table>
+
+</div></div></div>
+{% endblock page%}

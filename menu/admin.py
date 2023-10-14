@@ -12,6 +12,7 @@ admin.site.register(Service,ServiceAdm)
 class CustomerAdm(admin.ModelAdmin):
     list_display=['date','name','phone','service_type','service_id']
     
+
 admin.site.register(Customer,CustomerAdm)
 
 class TableAdm(admin.ModelAdmin):

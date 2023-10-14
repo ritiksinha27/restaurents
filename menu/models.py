@@ -64,5 +64,10 @@ class OrderItems(models.Model):
     
     item = models.ForeignKey(Menu, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
+    def __str__(self):
+        return self.order.order_no
+
+
+    
 
     
