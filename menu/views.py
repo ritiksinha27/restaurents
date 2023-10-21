@@ -72,55 +72,49 @@ def menu(request):
             else:
                 order_crt=Order.objects.create(service_id=customer,order_no=1)
                 order_crt.save()
-        order_det=Order.objects.get(service_id=customer)
-        menu_items=Menu.objects.all()
+        order_det=Order.objects.get(service_id=customer)#This will fetch order details for ongoing customer
+        pos=POS.objects.create(order_inf=order_det)
+        pos.save()#data has been saved to POS model also.
+        menu_items=Menu.objects.all() #fetch all data from Menu Models.
         category=Category.objects.all()
         Total=OrderItems.objects.filter(order=order_det)
         prc=0
         for order in Total:
             
             prc+=int(order.item.price*order.quantity)
-            # total_prc=sum(order.quantity*order.item.price)
+            #Total price of item with respect to its quantity
         print(prc)
             
-        
+        #a form to get the data to add item to order.
     if request.method=='GET':
             item=request.GET.get('item')
-            # print(item)
             order_id=request.GET.get('order_no')
-            # print(order_id)
             cust_id=request.GET.get('cust_id')
-            # print(cust_id)
-            # Total=OrderItems.objects.filter(order=order_no)
             if item:
                 item_name=Menu.objects.get(item=item)
                 order_no=Order.objects.get(order_no=order_id)
                 check=OrderItems.objects.filter(order=order_no,item=item_name)
-                # Total=OrderItems.objects.filter(order=order_no)
                 order_no=Order.objects.get(order_no=order_id)
                 if check:
                     x=OrderItems.objects.get(order=order_no,item=item_name)
                     x.quantity+=1
-                    x.save()
+                    x.save()#This logic will increase the existing item quantity .
                     return redirect(f'/menu/?customer_id={cust_id}')
                 else:
                     x=OrderItems.objects.create(order=order_no,item=item_name,quantity=1)
-                    x.save()
+                    x.save()#this will add new item to the order.
                     return redirect(f'/menu/?customer_id={cust_id}')
         
     return render(request,'menu.html',{'data':menu_items,'category':category,'data_pass':customer,'order_id':order_det,'total':Total,'total_prc':prc})
 
 def order(request,custid):
-    cust_id=custid
+    cust_id=custid#Cust id is the primary key which is passed through url.
     customer = Customer.objects.get(pk=cust_id)
     ord_det=Order.objects.get(service_id=customer)
     bill=OrderItems.objects.filter(order=ord_det)
-    x=[no.order.order_no for no in bill]
-    y=sum(nos.quantity*nos.item.price for nos in bill)
+    x=[no.order.order_no for no in bill]#to get the order no of customer
+    y=sum(nos.quantity*nos.item.price for nos in bill)#to get the total bill amount
     return render(request,'order.html',{'bill':bill,'order_no':x[0],'total':y})
 def kitchen(request):
-    orders=Order.objects.all()
-         
-
- 
+    orders=Order.objects.all()# to get the items and its quantity to get it prepared in kitchen.
     return render(request,'kitchen.html',{'orders':orders,})

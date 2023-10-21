@@ -9,4 +9,7 @@ urlpatterns = [
     path('menu_mgmt',menu_manage,name='menu_manage'),
     path('inventory',inventory_manage,name='inventory_manage'),
     path('customer_det',customer_details,name='customer_details'),
+    path('register',register,name='register'),
+    path('login_a',login_a,name='login_a'),
+    path('logout_a',logout_a,name='logout_a'),
 ]
