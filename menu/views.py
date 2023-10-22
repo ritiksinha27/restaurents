@@ -73,8 +73,7 @@ def menu(request):
                 order_crt=Order.objects.create(service_id=customer,order_no=1)
                 order_crt.save()
         order_det=Order.objects.get(service_id=customer)#This will fetch order details for ongoing customer
-        pos=POS.objects.create(order_inf=order_det)
-        pos.save()#data has been saved to POS model also.
+        #data has been saved to POS model already.
         menu_items=Menu.objects.all() #fetch all data from Menu Models.
         category=Category.objects.all()
         Total=OrderItems.objects.filter(order=order_det)
@@ -111,10 +110,22 @@ def order(request,custid):
     cust_id=custid#Cust id is the primary key which is passed through url.
     customer = Customer.objects.get(pk=cust_id)
     ord_det=Order.objects.get(service_id=customer)
+    
     bill=OrderItems.objects.filter(order=ord_det)
     x=[no.order.order_no for no in bill]#to get the order no of customer
     y=sum(nos.quantity*nos.item.price for nos in bill)#to get the total bill amount
+    if request.method=="GET":
+        done=request.GET.get('done')
+        if done:
+            x=POS.objects.filter(order_inf=ord_det)
+            if x:
+                return redirect('home')
+            else:
+                pos=POS.objects.create(order_inf=ord_det)
+                pos.save()
+                return redirect('home')
     return render(request,'order.html',{'bill':bill,'order_no':x[0],'total':y})
+    
 def kitchen(request):
     orders=Order.objects.all()# to get the items and its quantity to get it prepared in kitchen.
     return render(request,'kitchen.html',{'orders':orders,})

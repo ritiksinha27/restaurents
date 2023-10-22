@@ -35,5 +35,9 @@
 
 </table>
 <h2 style="padding: 20px;">Total price: {{total}}</h2> 
-<a href=/ class="btn btn-primary">Done</a>
+<form method="get">
+    <input type="hidden" value="done" name="done">
+    <button type="submit" class="btn btn-primary">Done</button>
+<!-- <a href=/ class="btn btn-primary">Done</a> -->
+</form>
 {% endblock page %}
